@@ -57,13 +57,9 @@ jobs:
       - run: mvn test
 workflows:
    version: 2
-   build-deploy:
+   build-deploy: 
     jobs:
       - build
       - deploy:
           requires:
             - build
-          filters:
-            branches:
-              only: master     
-
