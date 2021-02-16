@@ -26,12 +26,13 @@ jobs:
     docker:
      - image: cimg/python:3.8
     steps:
+      - run: 
+          name: python3 setup
+          command: sudo apt-get update && sudo apt-get install python3-pip awscli -y && 
       - aws-cli/setup
       - attach_workspace:
           at: .
-      - run: 
-          name: python3 setup
-          command: sudo apt-get update && sudo apt-get install python3-pip -y
+     
       
       - aws-code-deploy/push-bundle:
           application-name: sampleapp
