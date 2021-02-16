@@ -1,7 +1,12 @@
 version: 2.0
+orbs:
+  aws-cli: circleci/aws-cli@0.1
+  orb-tools: circleci/orb-tools@9.0
+  aws-code-deploy: circleci/aws-code-deploy@1.0.1
 
 jobs:
   build:
+    working_directory: ~/
     docker:
       - image: circleci/openjdk:stretch
         auth:
@@ -14,6 +19,26 @@ jobs:
          root: ./
          paths:
            - target/
+      - aws-code-deploy/push-bundle:
+          application-name: sampleapp
+          bundle-source: ~/ruby-stage
+          bundle-bucket: sampleappraj
+          bundle-key: sample/$CIRCLE_PROJECT_REPONAME-${CIRCLE_BRANCH}-$CIRCLE_TAG-<< pipeline.git.revision	>>-<< pipeline.git.tag	>>  
+  deploy:
+   
+    executor: java/default
+    steps:
+      - attach_workspace:
+          at: .
+      - run: 
+          name: python3 setup
+          command: sudo apt-get update && sudo apt-get install python3-pip -y
+      - aws-cli/setup
+      - aws-code-deploy/deploy-bundle:
+          application-name: sampleapp
+          deployment-group: sampleapp-group
+          bundle-bucket: sampleappraj
+          bundle-key: sample/$CIRCLE_PROJECT_REPONAME-${CIRCLE_BRANCH}-$CIRCLE_TAG-<< pipeline.git.revision	>>-<< pipeline.git.tag	>>           
 
   test:
     docker:
@@ -26,13 +51,21 @@ jobs:
       - attach_workspace:
           at: ./target
       - run: mvn test
-
 workflows:
   version: 2
-
-  build-then-test:
+  build-deploy-stage:
     jobs:
-      - build
-      - test:
+      - build_stage:
+          filters:
+            branches:
+              only: master
+              ignore:
+                - develop
+                - /feature-.*/
+      - deploy_stage:
           requires:
-            - build
+            - build_stage
+          filters:
+            branches:
+              only: master     
+
