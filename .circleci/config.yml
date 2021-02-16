@@ -53,18 +53,18 @@ jobs:
       - run: mvn test
 workflows:
   version: 2
-  build-deploy-stage:
+  build-deploy:
     jobs:
-      - build_stage:
+      - build:
           filters:
             branches:
               only: master
               ignore:
                 - develop
                 - /feature-.*/
-      - deploy_stage:
+      - deploy:
           requires:
-            - build_stage
+            - build
           filters:
             branches:
               only: master     
