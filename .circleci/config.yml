@@ -6,7 +6,7 @@ orbs:
 
 jobs:
   build:
-    working_directory: ~/java-app
+    working_directory: ~/
     docker:
       - image: circleci/openjdk:stretch
         auth:
