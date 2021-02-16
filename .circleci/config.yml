@@ -1,9 +1,8 @@
-version: 2.1
+version: 2.0
 orbs:
   aws-cli: circleci/aws-cli@0.1
   orb-tools: circleci/orb-tools@9.0
   aws-code-deploy: circleci/aws-code-deploy@1.0.1
-  maven: circleci/maven@1.1.0
 
 jobs:
   build:
@@ -27,7 +26,7 @@ jobs:
           bundle-key: sample/$CIRCLE_PROJECT_REPONAME-${CIRCLE_BRANCH}-$CIRCLE_TAG-<< pipeline.git.revision	>>-<< pipeline.git.tag	>>  
   deploy:
    
-    executor: maven/default
+    executor: java/default
     steps:
       - attach_workspace:
           at: .
@@ -53,18 +52,14 @@ jobs:
           at: ./target
       - run: mvn test
 workflows:
-  build-deploy:
+   version: 2
+   build-deploy:
     jobs:
-      - build:
-          filters:
-            branches:
-              only: master
-              ignore:
-                - develop
-                - /feature-.*/
+      - build
       - deploy:
           requires:
             - build
           filters:
             branches:
               only: master     
+
