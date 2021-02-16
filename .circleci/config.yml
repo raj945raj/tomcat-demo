@@ -1,4 +1,4 @@
-version: 2.0
+version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@0.1
   orb-tools: circleci/orb-tools@9.0
@@ -61,7 +61,6 @@ jobs:
           at: ./target
       - run: mvn test
 workflows:
-   version: 2
    build-deploy:
     jobs:
       - build
