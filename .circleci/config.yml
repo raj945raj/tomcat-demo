@@ -22,7 +22,6 @@ jobs:
            - target/
 
   deploy:
-   
     executor: aws-cli/default
     steps:
       - aws-cli/setup
