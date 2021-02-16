@@ -24,6 +24,7 @@ jobs:
   deploy:
     executor: aws-cli/default
     steps:
+      - checkout
       - aws-cli/setup
       - attach_workspace:
           at: .
