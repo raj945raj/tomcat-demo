@@ -24,10 +24,7 @@ jobs:
   deploy:
    
     docker:
-      - image: circleci/openjdk:stretch
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+     - image: cimg/python:3.8
     steps:
       - attach_workspace:
           at: .
