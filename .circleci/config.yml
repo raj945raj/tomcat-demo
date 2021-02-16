@@ -6,7 +6,7 @@ orbs:
 
 jobs:
   build:
-    working_directory: ~/ruby-stage
+    working_directory: ~/
     docker:
       - image: circleci/openjdk:stretch
         auth:
@@ -15,11 +15,7 @@ jobs:
     steps:
       - checkout
       - run: mvn -Dmaven.test.skip=true package
-      - run: 
-          name: python3 setup
-          command: sudo apt-get update && sudo apt-get install python3-pip -y
-       
-      - aws-cli/setup
+
       - persist_to_workspace:
          root: ./
          paths:
@@ -28,8 +24,10 @@ jobs:
   deploy:
    
     docker:
-      - image: cimg/python:3.8
-    
+      - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - attach_workspace:
           at: .
@@ -41,7 +39,7 @@ jobs:
           application-name: sampleapp
           bundle-source: ~/ruby-stage
           bundle-bucket: sampleappraj
-          bundle-key: sample/$CIRCLE_PROJECT_REPONAME-${CIRCLE_BRANCH}-$CIRCLE_TAG-<< pipeline.git.revision	>>-<< pipeline.git.tag	>>     
+          bundle-key: sample/$CIRCLE_PROJECT_REPONAME-${CIRCLE_BRANCH}-$CIRCLE_TAG-<< pipeline.git.revision	>>-<< pipeline.git.tag	>>  
       - aws-code-deploy/deploy-bundle:
           application-name: sampleapp
           deployment-group: sampleapp-group
