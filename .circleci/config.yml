@@ -31,7 +31,7 @@ jobs:
       
       - aws-code-deploy/push-bundle:
           application-name: sampleapp
-          bundle-source: ~/
+          bundle-source: ~/java-app
           bundle-bucket: sampleappraj
           bundle-key: sample/$CIRCLE_PROJECT_REPONAME-${CIRCLE_BRANCH}-$CIRCLE_TAG-<< pipeline.git.revision	>>-<< pipeline.git.tag	>>  
       - aws-code-deploy/deploy-bundle:
