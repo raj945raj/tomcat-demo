@@ -17,7 +17,7 @@ jobs:
       - run: mvn -Dmaven.test.skip=true package
 
       - persist_to_workspace:
-         root: ./java-app
+         root: .
          paths:
            - target/
 
@@ -27,11 +27,11 @@ jobs:
       - checkout
       - aws-cli/setup
       - attach_workspace:
-          at: ./java-app
+          at: .
       
       - aws-code-deploy/push-bundle:
           application-name: sampleapp
-          bundle-source: ~/java-app
+          bundle-source: ~/
           bundle-bucket: sampleappraj
           bundle-key: sample/$CIRCLE_PROJECT_REPONAME-${CIRCLE_BRANCH}-$CIRCLE_TAG-<< pipeline.git.revision	>>-<< pipeline.git.tag	>>  
       - aws-code-deploy/deploy-bundle:
