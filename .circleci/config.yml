@@ -9,7 +9,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: ./mvnw -Dmaven.test.skip=true package
+      - run: ./mvn -Dmaven.test.skip=true package
       - persist_to_workspace:
          root: ./
          paths:
@@ -25,7 +25,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ./target
-      - run: ./mvnw test
+      - run: ./mvn test
 
 workflows:
   version: 2
