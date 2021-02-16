@@ -6,7 +6,7 @@ orbs:
 
 jobs:
   build:
-    working_directory: ~/
+    working_directory: ~/java-app
     docker:
       - image: circleci/openjdk:stretch
         auth:
@@ -17,7 +17,7 @@ jobs:
       - run: mvn -Dmaven.test.skip=true package
 
       - persist_to_workspace:
-         root: ./
+         root: ./java-app
          paths:
            - target/
 
@@ -37,7 +37,7 @@ jobs:
       - aws-cli/setup
       - aws-code-deploy/push-bundle:
           application-name: sampleapp
-          bundle-source: ~/ruby-stage
+          bundle-source: ~/java-app
           bundle-bucket: sampleappraj
           bundle-key: sample/$CIRCLE_PROJECT_REPONAME-${CIRCLE_BRANCH}-$CIRCLE_TAG-<< pipeline.git.revision	>>-<< pipeline.git.tag	>>  
       - aws-code-deploy/deploy-bundle:
