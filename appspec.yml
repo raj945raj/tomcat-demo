@@ -3,9 +3,9 @@ os: linux
 files:
   - source: /SimpleTomcatWebApp.war
     destination: /opt/tomcat/webapps
-hooks:
-  BeforeInstall:
-    - location: scripts/restart_server
-      timeout: 300
-      runas: root
+# hooks:
+#   BeforeInstall:
+#     - location: scripts/restart_server
+#       timeout: 300
+#       runas: root
  
