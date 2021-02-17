@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: /SimpleTomcatWebApp.war
+  - source: ./target/SimpleTomcatWebApp.war
     destination: /opt/tomcat/webapps
 # hooks:
 #   BeforeInstall:
