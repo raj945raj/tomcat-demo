@@ -1,0 +1,69 @@
+name: Deploy to EKS
+ 
+on:
+  workflow_dispatch:
+    inputs:
+      IMG_TAG:
+        description: "IMG_TAG"
+        required: true
+        default: "latest"
+      ENV_OVERRIDES:
+        description: "ENV OVERRIDES"
+        required: false
+        default: ""
+ 
+jobs:
+  deploy:
+    name: Deploy to EKS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+ 
+      - name: Splitting Inputs Args
+        run: |-
+          echo ${{ github.event.inputs.ENV_OVERRIDES }} | sed "s/,/\n/g"
+          echo ${{ github.event.inputs.ENV_OVERRIDES }} | sed "s/,/\n/g" > k8s/overlays/crispr/crisman.env
+ 
+      - name: Print crisman.env
+        run: cat k8s/overlays/crispr/crisman.env
+ 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+ 
+      - name: Setting kubeconfig
+        uses: azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
+        id: setcontext
+ 
+      - name: Print kubectl & kustomize versions
+        run: |-
+          kubectl version
+          kustomize version
+ 
+      - name: Kustomize Set Image
+        run: |-
+          cd k8s/overlays/crispr
+          kustomize edit set image crisman=77777777.dkr.ecr.eu-west-1.amazonaws.com/crisman:${{github.event.inputs.IMG_TAG}}
+ 
+      - name: Show kustomization.yaml
+        run: |-
+          cd k8s/overlays/crispr
+          cat kustomization.yaml
+ 
+      - name: Deploy to EKS
+        run: |-
+          cd k8s/overlays/crispr
+          kustomize build . | kubectl apply -f -
+ 
+      - name: Update Image
+        run: kubectl rollout restart deployment crisman
+ 
+      - name: Status
+        run: |-
+          kubectl get pods
