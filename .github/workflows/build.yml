@@ -28,9 +28,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
       uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
+      with:
+        java-version: '11'
+        distribution: 'adopt'
     - name: Build with Maven
       run: mvn --batch-mode --update-snapshots verify
     # Add steps here like linting, testing, minification, etc.
