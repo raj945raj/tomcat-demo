@@ -50,7 +50,7 @@ jobs:
 
     - run: mkdir -p target/
 
-    - run: echo hello > SimpleTomcatWebApp.war
+    - run: echo hello > target/SimpleTomcatWebApp.war
 
     - uses: actions/upload-artifact@v1
       with:
