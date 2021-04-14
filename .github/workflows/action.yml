@@ -74,7 +74,7 @@ jobs:
           name: de-sy-file
           path: target/
 
-    - run: cat target/de-sy-file.jar
+    - run: cat target/SimpleTomcatWebApp.war
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
