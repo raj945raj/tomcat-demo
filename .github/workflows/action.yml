@@ -59,6 +59,7 @@ jobs:
 
   deploy:
     name: Deploy
+    
     needs: [build]
     runs-on: ubuntu-latest
 
@@ -94,6 +95,7 @@ jobs:
         ECR_REPOSITORY: my-ecr-repo
         IMAGE_TAG:  latest
         CONTAINER_IMAGE: my-ecr-repo:${{ github.sha }}
+      if: github.ref == 'refs/heads/master'  
       run: |
         # Build a docker container and
         # push it to ECR so that it can
