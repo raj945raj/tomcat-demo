@@ -3,6 +3,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tomcat-demo
+  labels:
+    app: tomcat-demo
   annotations:
     fluxcd.io/automated: "true"
 spec:
