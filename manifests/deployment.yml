@@ -7,21 +7,21 @@ metadata:
     fluxcd.io/automated: "true"
 spec:
   replicas: 1
-  selector:
-      matchLabels:
-        app.kubernetes.io/name: tomcat-demo
   strategy:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
   minReadySeconds: 5
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: tomcat-demo
   template:
     metadata:
       labels:
-        app: tomcat-demo
+        app.kubernetes.io/name: tomcat-demo
     spec:
       containers:
-      - name: aws-example-octodex
+      - name: tomcat-demo
         # image: 00000000000000.dkr.ecr.my-region.amazonaws.com/example-eks:tag
         image: 558811456770.dkr.ecr.ap-south-1.amazonaws.com/my-ecr-repo:latest
         ports:
