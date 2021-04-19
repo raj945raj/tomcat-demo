@@ -105,6 +105,6 @@ jobs:
         #echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
         docker build -t $ECR_REGISTRY/$CONTAINER_IMAGE .
         docker push $ECR_REGISTRY/$CONTAINER_IMAGE
-        echo "::set-output name=image::$ECR_REGISTRY/$CONTAINER_IMAGE
+        echo "::set-output name=image::$ECR_REGISTRY/$CONTAINER_IMAGE"
         
         
