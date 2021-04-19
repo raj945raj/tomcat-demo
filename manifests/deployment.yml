@@ -2,11 +2,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: aws-example-octodex
+  name: tomcat-demo
   annotations:
     fluxcd.io/automated: "true"
 spec:
   replicas: 1
+  selector:
+      matchLabels:
+        app.kubernetes.io/name: tomcat-demo
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -15,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        app: aws-example-octodex
+        app: tomcat-demo
     spec:
       containers:
       - name: aws-example-octodex
