@@ -8,4 +8,5 @@ spec:
     - port: 80
       targetPort: 8080
   selector:
-    app: tomcat-demo
+    matchLabels:
+      app.kubernetes.io/name: tomcat-demo
