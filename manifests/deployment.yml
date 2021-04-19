@@ -22,7 +22,7 @@ spec:
         # image: 00000000000000.dkr.ecr.my-region.amazonaws.com/example-eks:tag
         image: 558811456770.dkr.ecr.ap-south-1.amazonaws.com/my-ecr-repo:latest
         ports:
-        - containerPort: 5000
+        - containerPort: 8080
         resources:
           requests:
             cpu: 250m
