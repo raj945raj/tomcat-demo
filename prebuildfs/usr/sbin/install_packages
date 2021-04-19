@@ -8,7 +8,7 @@ until [ $n -gt $max ]; do
     set +e
     (
       apt-get update -qq &&
-      DEBIAN_FRONTEND=noninteractive apt-get install apt-utils -y
+      DEBIAN_FRONTEND=noninteractive apt-get install apt-utils -y &&
       apt-get install -y --no-install-recommends "$@"
     )
     CODE=$?
