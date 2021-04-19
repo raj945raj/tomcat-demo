@@ -14,11 +14,11 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app.kubernetes.io/name: tomcat-demo
+      app: tomcat-demo
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: tomcat-demo
+        app: tomcat-demo
     spec:
       containers:
       - name: tomcat-demo
