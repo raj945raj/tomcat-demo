@@ -46,7 +46,7 @@ jobs:
       run:
         mvn clean package --file pom.xml
 
-    - uses: actions/checkout@v1
+#     - uses: actions/checkout@v1
 
     - run: mkdir -p target/
 
