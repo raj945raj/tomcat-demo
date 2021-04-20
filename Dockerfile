@@ -19,9 +19,10 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
     BITNAMI_IMAGE_VERSION="10.0.5-debian-10-r9"
-COPY target/SimpleTomcatWebApp.war /bitnami/tomcat/data/SimpleTomcatWebApp.war
+
 EXPOSE 8080 8443
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/tomcat/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/tomcat/run.sh" ]
+COPY target/SimpleTomcatWebApp.war /bitnami/tomcat/data/SimpleTomcatWebApp.war
