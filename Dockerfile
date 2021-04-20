@@ -26,8 +26,8 @@ FROM tomcat:alpine
 # USER 1001
 # ENTRYPOINT [ "/opt/bitnami/scripts/tomcat/entrypoint.sh" ]
 # CMD [ "/opt/bitnami/scripts/tomcat/run.sh" ]
-#RUN ["rm", "-fr", "/usr/local/tomcat/webapps/ROOT"]
+RUN ["rm", "-fr", "/usr/local/tomcat/webapps/ROOT"]
 #COPY ./build/libs/docker-tomcat-java-example.war /usr/local/tomcat/webapps/ROOT.war
-COPY ./target/SimpleTomcatWebApp.war /usr/local/tomcat/webapps/
+COPY ./target/SimpleTomcatWebApp.war /usr/local/tomcat/webapps/ROOT.war
 EXPOSE 8080 8443
 
