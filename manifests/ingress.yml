@@ -8,7 +8,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /app
+      - path: /
         backend:
           serviceName: tomcat-demo
           servicePort: 80
