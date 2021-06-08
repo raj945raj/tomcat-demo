@@ -7,10 +7,6 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
-  tls:
-  - hosts:
-    - anthonycornell.com
-    secretName: tls-secret
   rules:
   - host: anthonycornell.com
     http:
@@ -18,5 +14,18 @@ spec:
       - path: /
         backend:
           serviceName: tomcat-demo
-          servicePort: 80
+          servicePort: 80    
+# spec:
+#   tls:
+#   - hosts:
+#     - anthonycornell.com
+#     secretName: tls-secret
+#   rules:
+#   - host: anthonycornell.com
+#     http:
+#       paths:
+#       - path: /
+#         backend:
+#           serviceName: tomcat-demo
+#           servicePort: 80
 
