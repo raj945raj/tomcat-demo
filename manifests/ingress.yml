@@ -4,8 +4,8 @@ metadata:
   name: tomcat-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+#     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+#     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
   rules:
   - host: anthonycornell.com
@@ -14,7 +14,7 @@ spec:
       - path: /
         backend:
           serviceName: tomcat-demo
-          servicePort: 80    
+          servicePort: 8080    
 # spec:
 #   tls:
 #   - hosts:
