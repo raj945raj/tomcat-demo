@@ -25,7 +25,7 @@ spec:
       containers:
       - name: tomcat-demo
         # image: 00000000000000.dkr.ecr.my-region.amazonaws.com/example-eks:tag
-        image: 558811456770.dkr.ecr.us-west-2.amazonaws.com/my-ecr-repo:432bf18504925910fb2298d9eede2dfeda0b5eba
+        image: 558811456770.dkr.ecr.us-west-2.amazonaws.com/my-ecr-repo:d4f7d93332d0fcbe8a141e85b2ea8e52768c71f4
         ports:
         - containerPort: 8080
         resources:
