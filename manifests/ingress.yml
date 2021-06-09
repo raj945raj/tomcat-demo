@@ -1,31 +1,15 @@
+---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: tomcat-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-#     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-#     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
   rules:
-  - host: anthonycornell.com
-    http:
+  - http:
       paths:
-      - path: /
+      - path: /app
         backend:
-          serviceName: tomcat-demo
-          servicePort: 8080    
-# spec:
-#   tls:
-#   - hosts:
-#     - anthonycornell.com
-#     secretName: tls-secret
-#   rules:
-#   - host: anthonycornell.com
-#     http:
-#       paths:
-#       - path: /
-#         backend:
-#           serviceName: tomcat-demo
-#           servicePort: 80
-
+          serviceName: tomcat-service
+          servicePort: 80
