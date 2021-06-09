@@ -1,16 +1,12 @@
-apiVersion: v1
+---
 kind: Service
+apiVersion: v1
 metadata:
-  name: tomcat
+  name: tomcat-service
 spec:
-#   type: NodePort
-  ports:
-    - port: 8080
-      targetPort: 8080
   selector:
-    matchLabels:
-      app: tomcat-demo
-  template:
-    metadata:
-      labels:
-        app: tomcat-demo
+    app: tomcat
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
