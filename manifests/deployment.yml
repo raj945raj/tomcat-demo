@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: tomcat
-        image: 558811456770.dkr.ecr.us-west-2.amazonaws.com/my-ecr-repo:555af024c81ad9eb60b662f9a6c074a37e34511c
+        image: 558811456770.dkr.ecr.us-west-2.amazonaws.com/my-ecr-repo:de8ec14cc7b0bfef6c0ccbba19e1dfbf69658ad5
         ports:
         - containerPort: 8080
 #
