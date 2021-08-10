@@ -112,11 +112,11 @@ To access the EKS cluster from the command-line tool,  we require to have the aw
 ---
 
 ## k8s Cluster Install with Terraform tool
-###### First Change variables in 0-0-variables.tf file with your own variables, variable file we can control subnets, disk size , capacity type , instance type etc.. 
-### Service account and Roles setup files :
-###### 5-node-autoscaler-sa.tf ( file for setup Node Autoscaler Feature )
-###### 3-aws-alb-sa.tf ( file for setup aws-load-balancer-controller)
-###### 4-s3-read-write-sa.tf ( file for setup s3 bucket role for borneo namespace )
+First Change variables in 0-0-variables.tf file with your own variables, variable file we can control subnets, disk size , capacity type , instance type etc.. 
+##### Service account and Roles setup files :
+5-node-autoscaler-sa.tf ( file for setup Node Autoscaler Feature )
+3-aws-alb-sa.tf ( file for setup aws-load-balancer-controller)
+4-s3-read-write-sa.tf ( file for setup s3 bucket role for borneo namespace )
 
 ##### Run Terraform:
 
@@ -124,7 +124,7 @@ To access the EKS cluster from the command-line tool,  we require to have the aw
 terraform init
 terraform apply
 ```
-###### Set kubectl context to the new cluster: `aws eks update-kubeconfig --name cluster_name`
+Set kubectl context to the new cluster: `aws eks update-kubeconfig --name cluster_name`
 
 ###### Check that there is a node that is `Ready`:
 ---
@@ -205,7 +205,7 @@ Capture the Policy ARN with help of the below command. We required this ARN in t
 aws iam list-policies | jq -cr '.Policies[] | select (.PolicyName == "AWSLoadBalancerControllerIAMPolicy").Arn'
 ```
 _Please make sure you have [jq](https://stedolan.github.io/jq/download/) utility is available on your workstation_
-#### Rest steps will be same for both( terrafor and ekctl ) created cluster
+####  Further steps will be same for both( terraform and ekctl ) created cluster
 ---
 ##### Install the TargetGroupBinding custom resource definitions. 
 ###### Install TargetGroupBinding CRD (custom resource definitions) by running a command:
