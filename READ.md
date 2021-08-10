@@ -114,9 +114,9 @@ To access the EKS cluster from the command-line tool,  we require to have the aw
 ## k8s Cluster Install with Terraform tool
 First Change variables in 0-0-variables.tf file with your own variables, variable file we can control subnets, disk size , capacity type , instance type etc.. 
 ##### Service account and Roles setup files :
-5-node-autoscaler-sa.tf ( file for setup Node Autoscaler Feature )
-3-aws-alb-sa.tf ( file for setup aws-load-balancer-controller)
-4-s3-read-write-sa.tf ( file for setup s3 bucket role for borneo namespace )
+- 5-node-autoscaler-sa.tf ( file for setup Node Autoscaler Feature )
+- 3-aws-alb-sa.tf ( file for setup aws-load-balancer-controller)
+- 4-s3-read-write-sa.tf ( file for setup s3 bucket role for borneo namespace )
 
 ##### Run Terraform:
 
